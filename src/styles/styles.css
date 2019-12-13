@@ -1,5 +1,19 @@
 body {
-  background: paleturquoise;
+  padding-top: 20%;
+  background: #eeeeee;
   color: palevioletred;
   text-align: center;
+}
+
+.fetchButton {
+  padding: 7px;
+  border: none;
+  background-color: darksalmon;
+  color: white;
+  border-radius: 7px;
+}
+
+.fullName {
+  color: darkcyan;
+  font-style: italic;
 }
