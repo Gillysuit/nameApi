@@ -6,6 +6,7 @@ const cors = require("cors");
 
 const populatePeopleCollection = require("./dummyData/populatePeople");
 const Person = require("./models/personModel");
+const personController = require("./controllers/personController");
 
 const app = express();
 const PORT = 3000;
@@ -37,6 +38,10 @@ mongoose.connection
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../index.html"));
+});
+
+app.get("/firstName", personController.getAFirstName, (req, res) => {
+  res.status(200).send(JSON.stringify(res.locals.firstName));
 });
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));
