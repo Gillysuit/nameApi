@@ -5,9 +5,7 @@ module.exports = {
   devtool: "cheap-eval-source-map",
   target: "web",
   mode: process.env.NODE_ENV,
-  entry: {
-    main: "./src/index.jsx"
-  },
+  entry: ["babel-polyfill", "./src/index.jsx"],
   output: {
     filename: "bundle.js",
     path: path.join(__dirname, "./dist")
