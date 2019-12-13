@@ -13,5 +13,24 @@ module.exports = personController = {
           next();
         });
     });
+  },
+
+  // get the middle with an ID
+  getAMiddleName: (req, res, next) => {
+    const id = req.body._id;
+    Person.findById({ _id: id }, (err, result) => {
+      res.locals.middleName = result.middleName;
+      next();
+    });
+  },
+
+  // get the last with a middle name
+  getALastName: (req, res, next) => {
+    const middleName = req.body.middleName;
+    Person.find({ middleName: middleName }, (err, result) => {
+      console.log(result, "<~result");
+      res.locals.lastName = result[0].lastName;
+      next();
+    });
   }
 };

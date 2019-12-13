@@ -44,4 +44,12 @@ app.get("/firstName", personController.getAFirstName, (req, res) => {
   res.status(200).send(JSON.stringify(res.locals.firstName));
 });
 
+app.post("/middleName", personController.getAMiddleName, (req, res) => {
+  res.status(200).send(JSON.stringify(res.locals.middleName));
+});
+
+app.post("/lastName", personController.getALastName, (req, res) => {
+  res.status(200).send(JSON.stringify(res.locals.lastName));
+});
+
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));
