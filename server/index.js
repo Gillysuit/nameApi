@@ -4,6 +4,9 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
+const populatePeopleCollection = require("./dummyData/populatePeople");
+const Person = require("./models/personModel");
+
 const app = express();
 const PORT = 3000;
 
@@ -20,9 +23,17 @@ mongoose
   })
   .catch(err => console.log("app starting error", err));
 
-mongoose.connection.once("open", () => {
-  console.log(`connection has been made to mongods`);
-});
+mongoose.connection
+  .once("open", () => {
+    console.log(`connection has been made to mongods`);
+
+    Person.countDocuments({}, (err, count) => {
+      if (err) console.log(err);
+      // check if your local db hasn't been populate ~> populate it with dummy data if empty
+      if (!count) populatePeopleCollection();
+    });
+  })
+  .catch(error => console.log("connection error", error));
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../index.html"));
